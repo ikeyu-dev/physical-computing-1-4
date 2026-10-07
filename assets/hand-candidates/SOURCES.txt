@@ -1,0 +1,67 @@
+こもり：画面内に表示する手の素材候補
+取得日：2026-10-02
+
+preview.png は最初に取得した7候補の一覧。
+phosphor/ と kenney/ のSVGは配布元の原本。PNGは原本から256×256・背景透過で変換したもの。
+追加の5本指・ペールオレンジ版は lucide/hand-five-pale-orange.png で確認できる。
+実装への組み込み、採用の確定はしていない。
+
+当初の候補：Phosphorの hand-thin.svg または hand-palm-thin.svg。
+これらは指を4本に省略した絵のため、後続の「5本指」という要望には合わない。
+丸い指先と単純な輪郭が、こもりの線画に合わせやすい。
+hand-grabbing-thin.svg は指を曲げた比較候補。撫でる専用の姿勢ではない。
+Phosphorは線だけの素材で、手の内側も透明。重ねるとキャラクターが透ける。
+Kenneyは白い塗りがあり、手の輪郭が見やすいが線が太く、カーソルらしさが強い。
+どちらも手描きの素材ではない。色・線の印象を合わせる調整は今後の検討事項。
+
+1. Phosphor Icons / core
+配布元：https://github.com/phosphor-icons/core
+作者表記：Copyright (c) 2023 Phosphor Icons
+ライセンス：MIT。著作権表示と許諾文を配布物に保持する。
+原文：phosphor/LICENSE
+ライセンス取得元：https://raw.githubusercontent.com/phosphor-icons/core/main/LICENSE
+
+phosphor/hand-thin.svg
+https://raw.githubusercontent.com/phosphor-icons/core/main/assets/thin/hand-thin.svg
+phosphor/hand-palm-thin.svg
+https://raw.githubusercontent.com/phosphor-icons/core/main/assets/thin/hand-palm-thin.svg
+phosphor/hand-grabbing-thin.svg
+https://raw.githubusercontent.com/phosphor-icons/core/main/assets/thin/hand-grabbing-thin.svg
+
+2. Kenney / Cursor Pack 1.1
+配布元：https://kenney.nl/assets/cursor-pack
+作者：Kenney
+ライセンス：CC0。クレジットは任意。
+原文：kenney/License.txt（配布ZIPに同梱されたもの）
+取得ZIP：https://kenney.nl/media/pages/assets/cursor-pack/461b29df18-1717599281/kenney_cursor-pack.zip
+以下の4点だけを抜粋。保存名は原本と同じ。
+
+Vector/Outline/hand_open.svg → kenney/hand_open.svg
+Vector/Outline/hand_closed.svg → kenney/hand_closed.svg
+Vector/Outline/hand_thin_open.svg → kenney/hand_thin_open.svg
+Vector/Outline/hand_thin_closed.svg → kenney/hand_thin_closed.svg
+
+3. Lucide / hand（5本指の追加候補）
+配布元：https://lucide.dev/icons/hand
+原本取得元：https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/hand.svg
+原本保存先：lucide/hand-original.svg
+ライセンス：ISC。著作権表示と許諾文を配布物に保持する。
+原文：lucide/LICENSE
+ライセンス取得元：https://raw.githubusercontent.com/lucide-icons/lucide/main/LICENSE
+変更版：lucide/hand-five-pale-orange.svg と同名PNG（512×512、背景透過）
+変更内容：手の内側を #F5D5B5 で塗り、輪郭を #575047 に変更。
+輪郭幅を24単位のviewBox内で2から0.65へ変更。元の外形をつないだ塗り用パスを追加。
+親指と残り4本の指を確認済み。原本とライセンスは同フォルダに保持。
+
+4. Lucide / hand-grab（グーの追加候補）
+配布元：https://lucide.dev/icons/hand-grab
+原本取得元：https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/hand-grab.svg
+原本保存先：lucide/hand-grab-original.svg
+ライセンス：ISC。原文は lucide/LICENSE を参照。
+変更版：lucide/hand-grab-pale-orange.svg と同名PNG（512×512、背景透過）
+変更内容：外形をつないで #F5D5B5 の塗りを追加。輪郭色 #575047、線幅0.65。
+パーと同じ24×24の座標範囲・色・線幅・画像サイズ。手の下端位置もそろえている。
+握りかけの手を表す形で、親指を他の指の上に折り込んだ完全な拳の絵ではない。
+
+確認：SVGのXML解析、外部参照とスクリプトの有無、PNG変換、画像の目視確認。
+こもりに重ねたときの見え方と、カメラに追従する操作感は未検証。

@@ -1,0 +1,10 @@
+<ns0:svg xmlns:ns0="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 500 400"><ns0:path d="M82 333C194 339 308.667 338 426 330" stroke="#DBDDD4" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<ns0:path d="M125 284C100 222 130 115 204 90C259 70 329 92 357 142C388 195 389 262 363 294C307 315 174 315 125 284Z" fill="#E9E7DC" stroke="#33342F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<ns0:path d="M188 117C194 111.667 201.333 108 210 106M218 103L228 102" stroke="#76786F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<ns0:path d="M98 322C94.6667 310.667 94 303.333 96 300M97 319C103.667 309.667 109.333 305.667 114 307" stroke="#6E795C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<ns0:g transform="translate(95 125) scale(.6)"><ns0:path d="M170 300C153 281 152 245 167 218C184 181 232 169 275 183C317 198 334 254 314 288C291 319 203 326 170 300Z" fill="#F9F8F4" stroke="#33342F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+<ns0:path d="M228 280C234 283.333 239.333 282.667 244 278" stroke="#33342F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+<ns0:path d="M209 261C211.485 261 213.5 258.314 213.5 255C213.5 251.686 211.485 249 209 249C206.515 249 204.5 251.686 204.5 255C204.5 258.314 206.515 261 209 261Z" fill="#33342F" />
+<ns0:path d="M266 257C268.485 257 270.5 254.314 270.5 251C270.5 247.686 268.485 245 266 245C263.515 245 261.5 247.686 261.5 251C261.5 254.314 263.515 257 266 257Z" fill="#33342F" />
+<ns0:path d="M187 272L198 270M276 268L287 266" stroke="#BA503D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</ns0:g></ns0:svg>

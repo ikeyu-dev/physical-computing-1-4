@@ -1,0 +1,224 @@
+@font-face {
+    font-family: "Klee One";
+    src: url("/fonts/KleeOne-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+}
+:root {
+    font-family: "Klee One", "Hiragino Sans", sans-serif;
+    color: #33342f;
+    background: #f9f8f4;
+    --paper: #f9f8f4;
+    --ink: #33342f;
+    --muted: #76786f;
+    --line: #dbddd4;
+    --shell: #e9e7dc;
+    --accent: #ba503d;
+    --moss: #6e795c;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+button,
+input {
+    font: inherit;
+}
+button {
+    cursor: pointer;
+}
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--moss);
+    outline-offset: 6px;
+}
+.app {
+    width: 100%;
+    height: 100svh;
+    min-height: 420px;
+    overflow: hidden;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+.scene {
+    display: block;
+    width: min(100vw, 160svh);
+    height: min(100svh, 62.5vw);
+    overflow: visible;
+    touch-action: none;
+}
+.wordmark {
+    font-size: 32px;
+    fill: var(--ink);
+}
+.hint {
+    font-size: 30px;
+    fill: var(--ink);
+    animation: hint-in 0.7s ease both;
+}
+.hand {
+    pointer-events: none;
+}
+.mouse-mode .scene {
+    cursor: none;
+}
+.eyes {
+    transform-origin: 237px 253px;
+    animation: blink 6.7s infinite;
+}
+.sleep-marks {
+    animation: breath 4.4s ease-in-out infinite;
+}
+.camera-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+.setup {
+    position: absolute;
+    inset: 0;
+    background: rgba(249, 248, 244, 0.95);
+    display: grid;
+    align-items: center;
+    justify-items: start;
+    padding: 8% max(7%, calc((100vw - 1100px) / 2));
+}
+.setup-copy {
+    max-width: 760px;
+}
+.setup h1 {
+    font-size: clamp(28px, 4.1vw, 54px);
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 0 0 20px;
+}
+.setup p {
+    font-size: 18px;
+    line-height: 1.9;
+    margin: 0 0 24px;
+}
+.setup-actions {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 32px 0 24px;
+}
+.primary {
+    border: 1px solid var(--ink);
+    border-radius: 3px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 15px 24px;
+    font-size: 18px;
+}
+.primary:hover {
+    background: #505146;
+}
+.primary span {
+    margin-left: 12px;
+}
+.text-button {
+    color: var(--ink);
+    border: 0;
+    background: transparent;
+    padding: 12px 0;
+    font-size: 17px;
+    text-decoration: underline;
+    text-underline-offset: 7px;
+    text-decoration-color: #b6b8ac;
+}
+.sound-choice {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 0 20px;
+}
+.sound-choice input {
+    accent-color: var(--moss);
+    width: 16px;
+    height: 16px;
+}
+.setup .setup-note {
+    font-family: "Hiragino Sans", sans-serif;
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--muted);
+}
+.setup .error {
+    font-family: "Hiragino Sans", sans-serif;
+    font-size: 15px;
+    color: #934335;
+    max-width: 550px;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+@keyframes blink {
+    0%,
+    44%,
+    47%,
+    100% {
+        transform: scaleY(1);
+    }
+    45.5% {
+        transform: scaleY(0.1);
+    }
+}
+@keyframes breath {
+    0%,
+    100% {
+        opacity: 0.4;
+        transform: translateY(2px);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-3px);
+    }
+}
+@keyframes hint-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@media (max-width: 600px) {
+    .setup {
+        padding: 28px;
+    }
+    .setup-actions {
+        gap: 12px;
+    }
+    .setup h1 {
+        font-size: 30px;
+    }
+    .setup p {
+        font-size: 16px;
+    }
+    .primary {
+        font-size: 16px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .eyes,
+    .sleep-marks,
+    .hint {
+        animation: none;
+    }
+}
