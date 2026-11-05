@@ -6,7 +6,8 @@ export const CONFIG = {
     absenceGrace: 0.6,
     retreatAfter: 10,
     sleepAfterAbsence: 30,
-    sleepAfterMax: 20,
+    drowsyAfterMax: 2,
+    sleepAfterMax: 10,
     sleepMinimum: 4,
     rearmAbsence: 1.2,
     startleSpeed: 1100,
@@ -14,7 +15,7 @@ export const CONFIG = {
     startleRecovery: 2.5,
     strokeMinSpeed: 16,
     strokeMaxSpeed: 420,
-    comfortPerSecond: 20,
+    comfortPerSecond: 10,
     calmPerSecond: 0.8,
     comfortLoss: 12,
     absenceLossPerSecond: 3,
@@ -24,5 +25,5 @@ export const CONFIG = {
     hintSeconds: 9,
 } as const;
 
-export const HEAD = { x: 625, y: 463, rx: 144, ry: 90 };
+export const HEAD = { x: 640, y: 510, rx: 170, ry: 125 };
 export const NEAR = { x: 640, y: 465, rx: 330, ry: 270 };

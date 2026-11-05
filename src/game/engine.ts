@@ -1,7 +1,14 @@
 import { CONFIG, HEAD, NEAR } from "./config";
 
 export type Pose = "open" | "closed";
-export type Hand = { x: number; y: number; speed: number; pose: Pose };
+export type Point = { x: number; y: number };
+export type Hand = {
+    x: number;
+    y: number;
+    speed: number;
+    pose: Pose;
+    contactPoints?: Point[];
+};
 export type Phase = "waiting" | "active" | "startled" | "drowsy" | "sleeping";
 export type State = {
     phase: Phase;
@@ -33,12 +40,27 @@ export const initialState = (): State => ({
     interactionTime: 0,
 });
 
-function inside(hand: Hand, area: typeof HEAD) {
+function inside(hand: Point, area: typeof HEAD) {
     return (
         ((hand.x - area.x) / area.rx) ** 2 +
             ((hand.y - area.y) / area.ry) ** 2 <=
         1
     );
+}
+
+function contactStrength(hand: Hand, area: typeof HEAD) {
+    const points = [hand, ...(hand.contactPoints ?? [])];
+    let strength = 0;
+    for (const point of points) {
+        const distance = Math.sqrt(
+            ((point.x - area.x) / area.rx) ** 2 +
+                ((point.y - area.y) / area.ry) ** 2,
+        );
+        const progress = Math.max(0, Math.min(1, (1.25 - distance) / 0.45));
+        const eased = progress * progress * (3 - 2 * progress);
+        strength = Math.max(strength, eased);
+    }
+    return strength;
 }
 
 function phase(s: State, next: Phase) {
@@ -102,7 +124,7 @@ export function step(
             s.absence = 0;
             return s;
         }
-        if (s.fullTime >= CONFIG.sleepAfterMax - 4 && s.phase !== "drowsy")
+        if (s.fullTime >= CONFIG.drowsyAfterMax && s.phase !== "drowsy")
             phase(s, "drowsy");
     }
     const fast =
@@ -122,10 +144,12 @@ export function step(
         if (s.calm >= CONFIG.startleRecovery) phase(s, "active");
     } else if (hand) {
         s.calm += dt;
+        const contact =
+            s.phase === "active" && s.reveal > 0.65
+                ? contactStrength(hand, HEAD)
+                : 0;
         s.stroking =
-            s.phase === "active" &&
-            s.reveal > 0.65 &&
-            inside(hand, HEAD) &&
+            contact >= 0.5 &&
             hand.speed >= CONFIG.strokeMinSpeed &&
             hand.speed <= CONFIG.strokeMaxSpeed;
         // グーパーは見た目のみ。どちらでも同じ位置・速度で触れ合える。
@@ -134,11 +158,14 @@ export function step(
                 100,
                 s.comfort +
                     dt *
-                        (s.stroking
-                            ? CONFIG.comfortPerSecond
-                            : CONFIG.calmPerSecond),
+                        (CONFIG.calmPerSecond +
+                            contact *
+                                (CONFIG.comfortPerSecond -
+                                    CONFIG.calmPerSecond)),
             );
-        if (s.comfort >= 100 && s.fullTime === null) s.fullTime = 0;
+        if (s.comfort >= 100 && s.fullTime === null) {
+            s.fullTime = 0;
+        }
     }
     if (s.absence > CONFIG.retreatAfter)
         s.comfort = Math.max(0, s.comfort - dt * CONFIG.absenceLossPerSecond);

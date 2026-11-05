@@ -55,10 +55,17 @@ describe("こもりの体験", () => {
         expect(s.phase).toBe("sleeping");
         expect(s.reveal).toBe(0);
     });
-    it("MAX後N秒で殻に眠り、手が残っていても再開しない", () => {
-        let s = run(initialState(), gentle, 16);
-        expect(s.fullTime).not.toBeNull();
-        s = run(s, gentle, CONFIG.sleepAfterMax + 3);
+    it("MAXから2秒でうとうとし、10秒で眠る", () => {
+        let s = initialState();
+        s.phase = "active";
+        s.reveal = 1;
+        s.comfort = 100;
+        s.fullTime = 0;
+        s = run(s, gentle, CONFIG.drowsyAfterMax - 0.2);
+        expect(s.phase).toBe("active");
+        s = run(s, gentle, 0.3);
+        expect(s.phase).toBe("drowsy");
+        s = run(s, gentle, CONFIG.sleepAfterMax - CONFIG.drowsyAfterMax);
         expect(s.phase).toBe("sleeping");
         expect(s.reveal).toBe(0);
         s = run(s, gentle, 20);
@@ -70,11 +77,15 @@ describe("こもりの体験", () => {
         expect(s.fullTime).toBeNull();
     });
     it("MAX到達後に驚いても終了カウントを取り消さない", () => {
-        let s = run(initialState(), gentle, 16);
+        let s = initialState();
+        s.phase = "active";
+        s.reveal = 1;
+        s.comfort = 100;
+        s.fullTime = 0;
         s = run(s, { ...gentle, speed: 1800 }, 0.5);
         expect(s.comfort).toBeLessThan(100);
         expect(s.fullTime).not.toBeNull();
-        s = run(s, gentle, 24);
+        s = run(s, gentle, CONFIG.sleepAfterMax);
         expect(s.phase).toBe("sleeping");
     });
 });

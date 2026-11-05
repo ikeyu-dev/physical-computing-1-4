@@ -243,13 +243,49 @@ export default function App() {
                     if (pointer.current) pointer.current.pose = "open";
                 }}
             >
-                <text
-                    x="64"
-                    y="79"
-                    className="wordmark"
-                >
-                    こもり
-                </text>
+                {playing && (
+                    <text
+                        x="64"
+                        y="79"
+                        className="wordmark"
+                    >
+                        こもり
+                    </text>
+                )}
+                {playing && (
+                    <g
+                        role="progressbar"
+                        aria-label="好感度"
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-valuenow={Math.round(state.comfort)}
+                        data-testid="affection-gauge"
+                    >
+                        <text
+                            x="64"
+                            y="123"
+                            className="affection-label"
+                        >
+                            なかよし
+                        </text>
+                        <rect
+                            x="64"
+                            y="134"
+                            width="230"
+                            height="10"
+                            rx="5"
+                            className="affection-track"
+                        />
+                        <rect
+                            x="64"
+                            y="134"
+                            width={230 * (state.comfort / 100)}
+                            height="10"
+                            rx="5"
+                            className="affection-value"
+                        />
+                    </g>
+                )}
                 <Komori
                     state={playing ? state : initialState()}
                     hand={hand}
@@ -294,16 +330,17 @@ export default function App() {
                     aria-label="体験の準備"
                 >
                     <div className="setup-copy">
-                        <h1>
-                            {mode === "loading"
-                                ? "もうすこし、おまちください。"
-                                : "ちょっと、人見知りです。"}
-                        </h1>
-                        <p>
-                            {mode === "loading"
-                                ? "カメラと手の準備をしています。"
-                                : "手をみせて、ゆっくり。画面の中のこもりに会ってみませんか。"}
-                        </p>
+                        <h1 className="setup-title">こもり</h1>
+                        {mode === "setup" && (
+                            <p className="setup-instruction">
+                                マウスでは、押している間はグー。手を画面の外へ動かすと離れます。
+                            </p>
+                        )}
+                        {mode === "loading" && (
+                            <p className="setup-instruction">
+                                カメラと手の準備をしています。
+                            </p>
+                        )}
                         {error && (
                             <p
                                 className="error"
@@ -338,26 +375,6 @@ export default function App() {
                                 </>
                             )}
                         </div>
-                        {mode === "setup" && (
-                            <label className="sound-choice">
-                                <input
-                                    type="checkbox"
-                                    checked={soundOn}
-                                    onChange={(e) =>
-                                        setSoundOn(e.target.checked)
-                                    }
-                                />{" "}
-                                音をつける
-                            </label>
-                        )}
-                        <p className="setup-note">
-                            {mode === "loading"
-                                ? "許可の案内が出たら、カメラの使用を許可してください。"
-                                : "カメラ映像は保存・送信しません。途中で戻るときは Esc。"}
-                            <br />
-                            {mode === "setup" &&
-                                "マウスでは、押している間はグー。手を画面の外へ動かすと離れます。"}
-                        </p>
                     </div>
                 </section>
             )}

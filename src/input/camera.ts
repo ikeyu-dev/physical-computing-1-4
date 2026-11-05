@@ -1,4 +1,4 @@
-import { HandFilter, closedHand, palmPosition } from "./hand";
+import { HandFilter, closedHand, contactPositions, palmPosition } from "./hand";
 import type { Hand } from "../game/engine";
 
 export function cameraError(error: unknown) {
@@ -129,6 +129,7 @@ export async function startCamera(
                                 palmPosition(points),
                                 closedHand(points) ? "closed" : "open",
                                 now,
+                                contactPositions(points),
                             ),
                         );
                     else {

@@ -54,6 +54,16 @@ input:focus-visible {
     font-size: 32px;
     fill: var(--ink);
 }
+.affection-label {
+    font-size: 19px;
+    fill: var(--muted);
+}
+.affection-track {
+    fill: var(--line);
+}
+.affection-value {
+    fill: var(--moss);
+}
 .hint {
     font-size: 40px;
     fill: var(--ink);
@@ -132,24 +142,6 @@ input:focus-visible {
     text-decoration: underline;
     text-underline-offset: 7px;
     text-decoration-color: #b6b8ac;
-}
-.sound-choice {
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin: 0 0 20px;
-}
-.sound-choice input {
-    accent-color: var(--moss);
-    width: 16px;
-    height: 16px;
-}
-.setup .setup-note {
-    font-family: "Hiragino Sans", sans-serif;
-    font-size: 12px;
-    line-height: 1.9;
-    color: var(--muted);
 }
 .setup .error {
     font-family: "Hiragino Sans", sans-serif;
