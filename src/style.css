@@ -55,7 +55,7 @@ input:focus-visible {
     fill: var(--ink);
 }
 .hint {
-    font-size: 30px;
+    font-size: 40px;
     fill: var(--ink);
     animation: hint-in 0.7s ease both;
 }

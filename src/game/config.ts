@@ -14,7 +14,7 @@ export const CONFIG = {
     startleRecovery: 2.5,
     strokeMinSpeed: 16,
     strokeMaxSpeed: 420,
-    comfortPerSecond: 9,
+    comfortPerSecond: 20,
     calmPerSecond: 0.8,
     comfortLoss: 12,
     absenceLossPerSecond: 3,
